@@ -93,10 +93,12 @@ def signin(request):
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, 'signin.html', {"form": AuthenticationForm, "error": "Username or password is incorrect."})
+            error = "Nombre de usuario o contraseña incorrectos."
+            return render(request, 'signin.html', {"form": AuthenticationForm, "error": error})
 
         login(request, user)
         return redirect('tasks')
+
 
 @login_required
 def task_detail(request, task_id):
